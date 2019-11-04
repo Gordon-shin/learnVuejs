@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <div id="app">
+       <h2>{{message}}</h2>
+        <cpn2></cpn2>
+       <ul>
+           <li v-for="items in movies">{{items}}</li>
+       </ul>
+    </div>
+<script>
+    const cpn1 = Vue.extend({
+        template:`
+        <div>
+            <h2>我是标题</h2>
+           <p>我是内容 哈哈哈</p>
+        </div>
+        `
+    })
+    //第二个组件构造器
+    const cpn2 = Vue.extend({
+        template:`
+        <div>
+            <h2>我是标题</h2>
+           <p>我是内容 呵呵呵</p>
+           <cpn1></cpn1>
+        </div>
+        `,
+        components:{
+            cpn1:cpn1
+        }
+    })
+    const app = new Vue({
+        el:'#app',
+        data:{
+            message:'你好哈',
+            movies:['海王','星际穿越','流浪地球']
+        },
+        components:{
+            cpn2:cpn2
+        }
+    })
+</script>
+
+
+
+
+</body>
+</html>

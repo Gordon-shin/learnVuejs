@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <div id="app">
+       <h2>{{message}}</h2>
+       <ul>
+           <li v-for="items in movies">{{items}}</li>
+       </ul>
+        <cpn :number1="num1" :number2="num2" @num1change="fathernum1change"></cpn>
+    </div>
+<template id="cpn">
+    <div>
+        <h2> props:  {{number1}}</h2>
+        <h2>data:{{dnumber1}}</h2>
+        <!--<input type="text" v-model="dnumber1">-->
+        <input :value="dnumber1" @input="numInput1($event)">
+        <h2> props:  {{number2}}</h2>
+        <h2>data:{{dnumber2}}</h2>
+        <!--<input type="text" v-model="dnumber2">-->
+    </div>
+</template>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            num1:1,
+            num2:2,
+            message:'你好哈',
+            movies:['海王','星际穿越','流浪地球']
+        },
+        methods:{
+            fathernum1change:function (value) {
+                this.num1=parseInt(value)
+            }
+        },
+        components:{
+            cpn:{
+                template:'#cpn',
+                props:{
+                    number1:{
+                        type:Number,
+                        default:function () {
+
+                        }
+                    },
+                    number2:{
+                        type:Number,
+                        default:function () {
+
+                        }
+                    }
+                },
+                data:function () {
+                    return{
+                        dnumber1:this.number1,
+                        dnumber2:this.number2
+                    }
+                },
+                methods:{
+                    numInput1(InputEvent){
+                        //1.将input 中的值改变 data中的数据
+                        //2.然后将改变的值传给父组件
+                        //3.父组件通过接受到的参数对子组件数据进行改变
+                        console.log(InputEvent)
+                        this.dnumber1=InputEvent.target.value
+                        this.$emit('num1change',this.dnumber1)
+                    }
+                }
+            }
+        }
+    })
+</script>
+
+
+
+
+
+</body>
+</html>

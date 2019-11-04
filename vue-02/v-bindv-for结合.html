@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <div id="app">
+<!--
+       <h2 :style="{key(属性名):value（属性值）}">{{message}}</h2>
+-->
+        <h2 :style="{fontSize:'50px'}">{{message}}</h2>
+       <ul>
+           <li v-for="(items,index) in movies">{{index}}-{{items}}</li>
+       </ul>
+    </div>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            message:'你好哈',
+            movies:['海王','星际穿越','流浪地球']
+        },
+    })
+</script>
+
+
+
+
+</body>
+</html>

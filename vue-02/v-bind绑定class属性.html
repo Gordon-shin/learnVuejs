@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .active{
+            color:red;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<body>
+
+    <div id="app">
+        <h2 :class="{active:true}">{{message}}</h2> <!--//对象方式-->
+        <h2 :class="getClasses()">{{message}}</h2> <!--//对象方式-->
+
+       <ul>
+           <li v-for="items in movies">{{items}}</li>
+       </ul>
+    </div>
+
+
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            message:'你好哈',
+            movies:['海王','星际穿越','流浪地球'],
+            isActive:true,
+            isLine:false
+
+        },
+        methods:{
+            getClasses:function () {
+                return {active:this.isActive}
+             }
+        }
+
+    })
+
+</script>
+</body>
+</html>
