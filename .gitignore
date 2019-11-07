@@ -22,5 +22,6 @@ yarn-error.log*
 
 /webpack3/node_modules/
 /webpack2/node_modules/
-/webpack3/node_modules/
+
 /vuecli/node_modules/
+
