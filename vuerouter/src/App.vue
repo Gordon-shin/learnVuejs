@@ -3,8 +3,12 @@
     <div id="nav">
       <router-link to="/home">Home</router-link> <!--router link 表示组件的位置-->
       <router-link :to="'/user/'+userid">user</router-link>  <!--拼接url实现动态路由-->
-      <router-link to="/about">About</router-link>
-    </div>
+      <router-link to="/about">About </router-link>
+<!--
+      <router-link :to="{path: '/profile',query:{name:'why',age:18}}">profile</router-link>
+-->
+      <button @click="toProfile()">profile</button>
+    </div>  <!--用query属性传参数 url中的？=query-->
     <router-view></router-view>
   </div>
 </template>
@@ -22,7 +26,12 @@
       methods:{
       toHome(){
         this.$router.push('/')
-      }
+      },
+        toProfile(){
+        this.$router.push(
+          {path: '/profile',query:{name:'why',age:18}}
+        )
+        }
     }
   }
 
