@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const Home=()=>{import('../views/home/Home')}
-const Category=()=>{import('../views/category/Category')}
-const Cart=()=>{import('../views/cart/Cart')}
-const Profile=()=>{import('../views/profile/Profile')}
+const Home=()=>import('../views/home/Home') //懒加载语法要正确
+const Category=()=>import('../views/category/Category')
+const Cart=()=>import('../views/cart/Cart')
+const Profile=()=>import('../views/profile/Profile')
 
 Vue.use(VueRouter)
 
