@@ -19,13 +19,18 @@
         },
         data(){
             return {
-                isActive:true
+                //isActive:true
             }
+        },
+        computed:{
+           isActive(){
+               return this.$route.path.indexOf(this.path)!==-1
+           }
         },
         methods:{
             itemClick(){
                this.isActive=!this.isActive
-               console.log(this.path)
+              // console.log(this.path)
                 this.$router.push({path:this.path});
             }
         }

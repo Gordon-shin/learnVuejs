@@ -5,6 +5,7 @@ const Home=()=>import('../views/home/Home') //懒加载语法要正确
 const Category=()=>import('../views/category/Category')
 const Cart=()=>import('../views/cart/Cart')
 const Profile=()=>import('../views/profile/Profile')
+const DianQi = ()=>import('@/views/category/categoriescomps/DianQi')
 
 Vue.use(VueRouter)
 
@@ -21,7 +22,13 @@ const routes=[
     },
     {
         path:'/category',
-        component:Category
+        component:Category,
+        children:[
+            {
+                path:'/category/dianqi',
+                component:DianQi
+            }
+        ]
     },
     {
         path:'/profile',

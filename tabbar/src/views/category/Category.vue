@@ -1,5 +1,8 @@
 <template>
-    <h1>分类</h1>
+    <div>
+        <h1 style="background-color: red;">分类</h1>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>

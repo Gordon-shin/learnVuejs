@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+//1 使用setTimeout
+   /* setTimeout(()=>{
+        console.log('HelloWorld')
+    },1000)*/
+   //promise 传入函数 （参数resolve， reject）
+   new Promise((resolve,reject)=>{
+       setTimeout(()=>{
+           resolve() //resovle是函数
+       },1000)
+   }).then(()=>{
+       console.log('helloworld');
+       console.log('helloworld');
+       console.log('helloworld');
+       console.log('helloworld');
+
+       return new Promise((resolve,reject)=>{
+           setTimeout(()=>{
+               resolve('res') //resovle是函数
+           },1000)
+       })
+   }).then((res)=>{
+       console.log('hellojs');
+       console.log('hellojs');
+       console.log('hellojs');
+       console.log('hellojs');
+       console.log('hellojs');
+
+   })
+
+</script>
+</body>
+
+</html>
