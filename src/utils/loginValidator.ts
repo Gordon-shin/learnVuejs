@@ -11,10 +11,18 @@ interface ValidateRules {
     password: ({ required: boolean, message: string, trigger: string, min?: undefined, max?: undefined } |
         { min: number, max: number, message: string, required?: undefined, trigger?: undefined })[]
 }
-
+//登录变量
 export const loginUser = ref<User>({
     email: "",
     password: ""
+})
+//注册变量
+export const registerUser = ref({
+    name: "",
+    email: "",
+    password: "",
+    password2: "", //密码确认
+    role: "" //权限管理 选择身份
 })
 //分离登录规则
 export const rules = ref<ValidateRules>({

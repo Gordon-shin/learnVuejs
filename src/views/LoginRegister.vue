@@ -17,54 +17,59 @@
                 <!--登录-->
                 <!--                <h1>登录</h1>-->
                 <!--                <el-card style="width: 480px;height: 480px">-->
-                <LoginForm :loginUser="loginUser" :rules="rules"/>
+                <LoginForm class="sign-in-form loginForm" :loginUser="loginUser" :rules="rules"/>
 
                 <!--                </el-card>-->
 
-                <h1>注册</h1>
-                <!--ref表示表单的名字-->
-                <el-form
-                        :ref="registerForm"
-                        :rules="rules"
-                        :model="registerUser"
-                        label-width="100px" class="loginForm sign-in-form">
-                    <!--  RegisterUser对象 用于表单数据对象-->
-                        <el-form-item label="姓名" prop="name">
-                            <el-input v-model="registerUser.name" placeholder="请输入姓名...."></el-input>
-                        </el-form-item>
-                        <el-form-item label="邮箱" prop="email">
-                            <el-input v-model="registerUser.email" placeholder="请输入姓名...."></el-input>
-                        </el-form-item>
-                        <el-form-item label="密码" prop="password">
-                        <el-input v-model="registerUser.password" type="password" placeholder="请输入密码...."></el-input>
-                        </el-form-item>
-                        <el-form-item label="确认密码" prop="password">
-                            <el-input v-model="registerUser.password2" type="password"
-                                      placeholder="请重新输入密码...."></el-input>
-                        </el-form-item>
-                        <!--选择身份-->
-                        <el-form-item label="选择身份">
-                            <el-select v-model="registerUser.role" placeholder="请选择身份">
-                                <el-option label="管理员" value="admin"></el-option>
-                                <el-option label="用户" value="user"></el-option>
-                                <el-option label="访客" value="visitor"></el-option>
-                            </el-select>
-                        </el-form-item>
-                            <!--具体用法参考ElementUI Api用法-->
-                            <el-form-item>
-                                <el-button type="primary" @click="handleRegister('registerForm')">登录</el-button>
-                                <el-button>重置密码</el-button>
-                            </el-form-item>
-                </el-form>
-                <!--注册-->
+                <RegisterForm class="registerForm"
+                        :register-user="registerUser"
+                />
             </div>
+        </div>
+                <!--ref表示表单的名字-->
+<!--                <el-form-->
+<!--                        :ref="registerForm"-->
+<!--                        :rules="rules"-->
+<!--                        :model="registerUser"-->
+<!--                        label-width="100px" class="loginForm sign-in-form">-->
+<!--                    &lt;!&ndash;  RegisterUser对象 用于表单数据对象&ndash;&gt;-->
+<!--                        <el-form-item label="姓名" prop="name">-->
+<!--                            <el-input v-model="registerUser.name" placeholder="请输入姓名...."></el-input>-->
+<!--                        </el-form-item>-->
+<!--                        <el-form-item label="邮箱" prop="email">-->
+<!--                            <el-input v-model="registerUser.email" placeholder="请输入姓名...."></el-input>-->
+<!--                        </el-form-item>-->
+<!--                        <el-form-item label="密码" prop="password">-->
+<!--                        <el-input v-model="registerUser.password" type="password" placeholder="请输入密码...."></el-input>-->
+<!--                        </el-form-item>-->
+<!--                        <el-form-item label="确认密码" prop="password">-->
+<!--                            <el-input v-model="registerUser.password2" type="password"-->
+<!--                                      placeholder="请重新输入密码...."></el-input>-->
+<!--                        </el-form-item>-->
+<!--                        &lt;!&ndash;选择身份&ndash;&gt;-->
+<!--                        <el-form-item label="选择身份">-->
+<!--                            <el-select v-model="registerUser.role" placeholder="请选择身份">-->
+<!--                                <el-option label="管理员" value="admin"></el-option>-->
+<!--                                <el-option label="用户" value="user"></el-option>-->
+<!--                                <el-option label="访客" value="visitor"></el-option>-->
+<!--                            </el-select>-->
+<!--                        </el-form-item>-->
+<!--                            &lt;!&ndash;具体用法参考ElementUI Api用法&ndash;&gt;-->
+<!--                            <el-form-item>-->
+<!--                                <el-button type="primary" @click="handleRegister('registerForm')">登录</el-button>-->
+<!--                                <el-button>重置密码</el-button>-->
+<!--                            </el-form-item>-->
+<!--                </el-form>-->
+                <!--注册-->
+
+
             <div class="panels-container">
                 <!--设计的时候先显示在相同的页面，点击注册与登录的时候通过隐藏class来实现切换-->
                 <div class="panel left-panel">
                     <div class="content">
                         <h3>我是左边的panel</h3>
                         <p>我是左边的panel</p>
-                        <button class="btn transparent" @click="signUPModeChange">注册</button>
+                        <button class="btn transparent" @click="signUPMode=!signUPMode">注册</button>
                     </div>
                     <img src="@/assets/img/log.svg" class="image">
                 </div>
@@ -73,40 +78,44 @@
                     <div class="content">
                         <h3>我是右边的panel</h3>
                         <p>我是右边的panel</p>
-                        <button class="btn transparent" @click="signUPModeChange">登录</button>
+
+                        <button class="btn transparent" @click="signUPMode=!signUPMode">登录</button>
                     </div>
                     <img src="@/assets/img/register.svg" class="image">
                 </div>
             </div>
-        </div>
+
     </div>
 </template>
 
 <script lang="ts">
     import {ref, getCurrentInstance} from 'vue'
-    import {loginUser, rules} from "../utils/loginValidator";
+    import {loginUser,registerUser, rules} from "../utils/loginValidator";
     import LoginForm from '@/components/LoginForm.vue'
+    import RegisterForm from "@/components/RegisterForm.vue";
 
     export default {
         name: "LoginRegister"
         ,
-        components: {LoginForm},
+        components: {RegisterForm, LoginForm},
         setup() {
             // 主要设计思路：先设计前端表单绑定的数据类型 ，在通过v-model 与字段进行绑定
             //注册表单
-            const registerUser = ref({
-                name: "",
-                email: "",
-                password: "",
-                password2: "", //密码确认
-                role: "" //权限管理 选择身份
-            })
+            // const registerUser = ref({
+            //     name: "",
+            //     email: "",
+            //     password: "",
+            //     password2: "", //密码确认
+            //     role: "" //权限管理 选择身份
+            // })
             //该方法传入表单的名称然后进行操作
             // const handlerRegister = (formName:string) => {
             //
             // }
 
+            //const signUPMode = ref<boolean>(false)
             const signUPMode = ref<boolean>(false)
+            //登录组件的数据结构
             // const loginUser = ref({
             //     email: "",
             //     password: ""
@@ -121,19 +130,19 @@
             //         {min:6,max:30,message: "密码长度异常"}
             //     ],
             // })
-            const signUPModeChange = () => {
-                if (signUPMode.value) {
-                    signUPMode.value = false
-                } else {
-                    signUPMode.value = true
-                }
-            }
+            // const signUPModeChange = () => {
+            //     // if (signUPMode.value) {
+            //     //     signUPMode.value = false
+            //     // } else {
+            //     //     signUPMode.value = true
+            //     // }
+            // }
             //处理提交动作
             //composition Api 需要返回
             //setup 的生命 周期早于实例生成 return 后ref类型的会和data方法和methods合并
             return {
                 signUPMode,
-                signUPModeChange,
+                // signUPModeChange,
                 loginUser,
                 rules,
                 registerUser
@@ -143,6 +152,7 @@
 </script>
 
 <style scoped>
+
     .container {
         position: relative;
         width: 100%;
