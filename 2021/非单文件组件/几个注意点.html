@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>非单文件组件</title>
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="root">
+  {{msg}}}
+<school></school>
+</div>
+
+<script type="text/javascript">
+
+  Vue.config.productionTip = false
+  //定义组件
+  const school = Vue.extend({
+    template:`
+      <div>
+         <h2>学校名称：{{name}}</h2>
+        <h2>学校地址：{{address}}</h2>
+      </div>
+    `,
+    data(){
+      return{
+        name:'中山东路小学',
+        address:'中山东路203号'
+      }
+    }
+  })
+  const vm = new Vue({ //传入的是一个配置对象
+    el:'#root',
+    data:{
+     msg:"你好，欢迎使用vue"
+    },
+    components:{
+      school:school
+    }
+  })
+</script>
+
+</body>
+</html>

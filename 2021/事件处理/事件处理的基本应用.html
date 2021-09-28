@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的数据代理</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="root">
+    <h2>学校名称：{{name}}</h2>
+    <h2>学校地址：{{address}}</h2>
+    <button @click="showInfo">点我提示信息</button>
+    <button @click="showInfo2(223,$event)">点我提示信息2</button>
+
+</div>
+
+<script type="text/javascript">
+
+    Vue.config.productionTip = false
+    const vm = new Vue({ //传入的是一个配置对象
+        el:'#root',
+        data:{
+            name:'中山东路小学',
+            address:'中山东路203号'
+        },
+        methods:{
+            showInfo(event){
+            //showInfo:(event)=>{ //所有用vue管理的函数尽量用普通函数
+                alert("123")
+                console.log(event.target) //获取时间对象就是按钮本身
+                console.log(vm===this) //箭头函数this指向的是window
+            },
+
+            showInfo2(number,event2) {
+                //showInfo:(event)=>{ //所有用vue管理的函数尽量用普通函数
+                alert("123")
+                console.log(number)
+                console.log(event2)
+                console.log(vm===this) //箭头函数this指向的是window
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
