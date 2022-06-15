@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分析生命周期</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+<!--           <h2 :style="{opacity:opacity}">欢迎学习vue</h2>-->
+    <h2>当前的n值是:{{n}}</h2>
+    <button @click="add">点我n+1</button>
+</div>
+<script type="text/javascript">
+     Vue.config.productionTip = false
+    const vm =new Vue({
+        el:"#app",
+        data: {
+            opacity:1,
+            n:1
+        },
+        methods:{
+         // change(){
+         //     setInterval(()=>{
+         //         this.opacity -= 0.01
+         //         if (this.opacity<=0){
+         //             this.opacity=1
+         //         }
+         //     },16)
+         // },
+         add(){this.n++}
+        },
+        //Vue完成模板的解析并把初始的真实DOM元素放入页面后 挂在完毕要用mounted只在挂载前使用一次
+        mounted(){
+            setInterval(()=>{
+                this.opacity -= 0.01
+                if (this.opacity<=0){
+                    this.opacity=1
+                }
+            },16)
+        },
+        beforeCreate(){
+            //可打印vue 但无法打印vm_data
+            console.log("beforeCreate:")
+            console.log(this)
+            debugger;
+
+        }
+    })
+    //代码割裂
+    // setInterval(()=>{
+    //     vm.opacity -= 0.01
+    //     if (vm.opacity<=0){
+    //         vm.opacity=1
+    //     }
+    // },16)
+</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>localStorage</title>
+</head>
+<body>
+  <h2>localStorage</h2>
+  <button type="button" onclick="saveData();">Save</button>
+    <script type="text/javascript">
+        let p = {
+            "name":"张三",
+            "age":18
+        }
+        function saveData(){
+            window.localStorage.setItem('msg','helloworld')//字符串，键对值，后一个参数是string类型
+            window.localStorage.setItem('person',JSON.stringify(p))
+        }
+    </script>
+
+</body>
+</html>

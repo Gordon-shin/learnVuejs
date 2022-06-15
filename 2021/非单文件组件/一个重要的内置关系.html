@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一个重要的内置关系</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+
+</div>
+<!--
+    关于VueComponent：
+    1、school组件本质是一个名未VueComponent的构造函数，且不是程序员定义的，是Vue.extend生成的
+    2、我们只需要写<school/> 或者<school></school>,Vue解析的时候会帮我们创建school组件的实例对象
+    即Vue帮我们执行的 new VueComponent(options)
+    3
+    4、关于this 指向
+    （1）组件配置中：
+        data函数、methods中的函数、watch中的函数、computed中的函数 他们的this均是【VueComponent实例对象】
+     （2） new Vue()配置中：
+        data函数、methods中的函数、watch中的函数、computed中的函数他们的this均是指向【Vue实例】
+     5、VueComponent的实例对象，以后简称vc（组件实例对象）与vm实例还是有区别的
+     vue的实例对象，以后简称vm
+-->
+
+</body>
+<script type="text/javascript">
+
+    Vue.config.productionTip = false
+    //定义一个构造函数
+    function Demo(){
+        this.a = 1
+        this.b = 2
+    }
+    //创建一个Demo的实例对象
+    const d = new Demo();
+    console.log(Demo.prototype) //显性原型属性
+
+    console.log(d.__proto__) //隐式原型属性
+
+    //程序员拖过显示原型对象的操作原型对象，追加一个x属性，值为99
+    Demo.prototype.x = 99
+    console.log('@',d.__proto__.x)
+    //
+    //
+
+    //定义学校组件
+    const school = Vue.extend({
+        name:'school',
+        template:`
+      <div>
+         <h2>学校名称：{{name}}</h2>
+        <h2>学校地址：{{address}}</h2>
+          </div>
+    `,
+        data(){
+            return{
+                name:'中山东路小学',
+                address:'中山东路203号'
+            }
+        },
+
+    })
+    console.dir(school)
+
+
+    function Person(){
+
+    }
+
+    function Dog (){
+
+    }
+
+
+    const vm = new Vue({ //传入的是一个配置对象
+        el:'#root',
+        data:{
+            msg:"你好，欢迎使用vue"
+        }
+    })
+</script>
+
+</html>
