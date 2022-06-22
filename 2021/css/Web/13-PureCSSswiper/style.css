@@ -1,0 +1,124 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+/*总之em相对于父元素，rem相对于根元素*/
+/*三、rem实例：*/
+/*rem是全部的长度都相对于根元素(<html>元素)。通常做法是给html元素设置一个字体大小，然后其他元素的长度单位就为rem。*/
+html{
+  font-size: 62.5%;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.swiper{
+  display: flex;
+}
+
+img{
+  background-color: #666;
+
+  height: 60rem;
+  width: 10rem;
+  margin: 1rem;
+
+  border-radius: 20rem;
+
+  object-fit: cover;
+}
+
+a:nth-child(1) img{
+  animation: swiper 30s infinite;
+}
+a:nth-child(2) img{
+  animation: swiper 30s 6s infinite;
+}
+a:nth-child(3) img{
+  animation: swiper 30s 12s infinite;
+}
+a:nth-child(4) img{
+  animation: swiper 30s 18s infinite;
+}
+a:nth-child(5) img{
+  animation: swiper 30s 24s infinite;
+}
+
+@keyframes swiper {
+  0%{
+    width: 10rem;
+    border-radius: 20rem;
+  }
+  1%{
+    width: 60rem;
+    border-radius: 3.6rem;
+  }
+  20%{
+    width: 60rem;
+    border-radius: 3.6rem;
+  }
+  21%{
+    width: 10rem;
+    border-radius: 20rem;
+  }
+  100%{
+    width: 10rem;
+    border-radius: 20rem;
+  }
+}
+
+/* @media (max-width: 1400px){
+  html{
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 500px){
+  html{
+    font-size: 20%;
+  }
+} */
+
+
+a:nth-child(1) img{
+  animation: swiper 15s infinite;
+}
+a:nth-child(2) img{
+  animation: swiper 15s 3s infinite;
+}
+a:nth-child(3) img{
+  animation: swiper 15s 6s infinite;
+}
+a:nth-child(4) img{
+  animation: swiper 15s 9s infinite;
+}
+a:nth-child(5) img{
+  animation: swiper 15s 12s infinite;
+}
+
+@keyframes swiper {
+  0%{
+    width: 10rem;
+    border-radius: 20rem;
+  }
+  2%{
+    width: 60rem;
+    border-radius: 3.6rem;
+  }
+  20%{
+    width: 60rem;
+    border-radius: 3.6rem;
+  }
+  22%{
+    width: 10rem;
+    border-radius: 20rem;
+  }
+  100%{
+    width: 10rem;
+    border-radius: 20rem;
+  }
+}
